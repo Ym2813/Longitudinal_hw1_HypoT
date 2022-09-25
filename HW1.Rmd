@@ -1,0 +1,168 @@
+---
+title: "HW1"
+author: "Anna Ma"
+date: "2022-09-25"
+output: html_document
+---
+
+### Part A 
+
+Plasma inorganic phosphate measurements obtained from 13 control and 20 obese patients 0, 0.5, 1, 1.5, 2, and 3 hours after an oral glucose challenge. 
+
+Groups: S=2 \ 
+
+Time points: t=6 \
+
+Number of patients: N = $n_c + n_o = 13+20 = 33$ \
+
+Multivariate Model Set Up:
+
+
+\begin{align*} 
+Y_{N \times t} &= X_{N \times S}B_{S \times t} + E_{N \times t} \\ 
+
+Y_{33 \times 6} &= X_{33 \times 2}B_{2 \times 6} + E_{33 \times 6}
+
+\end{align*}
+
+The investigators intend to test the following hypotheses using Hotelling’s statistic :
+
+#### (a) To test the null hypothesis that the group means are the same at all six measurement times.
+
+Test of difference among the groups
+$H_0$: $\mu_c = \mu_o = \mu_{12}$ 
+
+\begin{align*}
+H_0 = A_{(S-1) \times S}B_{S \times t}C_{t \times 1} &= D_{(S-1) \times 1}\\
+
+A_{1\times 2}B_{2 \times 6}C_{6\times 1} &=D_{1 \times 1}
+\end{align*}
+
+
+**1.Assume parallelism is reasonable**
+
+$H_0$: $\mu_{11}+\mu_{12}+\mu_{13}=\mu_{31}+\mu_{32}+\mu_{33};\mu_{21}+\mu_{22}+\mu_{23}=\mu_{31}+\mu_{32}+\mu_{33}$
+
+\begin{align*}
+A_{1\times 2} &= [I,-1]  = [1,-1]\\
+B_{2 \times 6} &= \begin{bmatrix} \mu_{11} & \mu_{12} & \mu_{13} & \mu_{14} & \mu_{15} & \mu_{16} \\ \mu_{21} & \mu_{22} & \mu_{23} & \mu_{24} & \mu_{25} & \mu_{26}\end{bmatrix}\\
+C_{6\times 1} &=j_6 = \begin{bmatrix}
+1\\1\\1\\1\\1\\1\end{bmatrix} \\
+D_{1 \times 1} &= 0
+\end{align*}
+
+
+Therefore,
+\begin{align*}
+A \times B \times C &= D \\
+\begin{bmatrix} 1 & -1 \end{bmatrix}\begin{bmatrix}
+\mu_{11} & \mu_{12} & \mu_{13} & \mu_{14} & \mu_{15} & \mu_{16} \\
+\mu_{21} & \mu_{22} & \mu_{23} & \mu_{24} & \mu_{25} & \mu_{26}
+\end{bmatrix}
+\begin{bmatrix}
+1\\1\\1\\1\\1\\1
+\end{bmatrix}
+&=\begin{bmatrix}0 \end{bmatrix}
+\end{align*}
+
+**2.Without assuming parallelism** 
+
+$H_0$: $\mu_{11} = \mu_{31} ; \mu_{21}= \mu_{31}$...  
+
+\begin{align*}
+C_{6\times 6} &= I_6= \begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1
+\end{bmatrix} \\
+A_{1\times 2} &= [I,-1]  = [1,-1]\\
+D_{1 \times 6} &= 0_{1 \times 6} 
+\end{align*}
+
+Therefore,
+\begin{align*}
+A \times B \times C &= D \\
+\begin{bmatrix} 1 & -1 \end{bmatrix}\begin{bmatrix}
+\mu_{11} & \mu_{12} & \mu_{13} & \mu_{14} & \mu_{15} & \mu_{16} \\
+\mu_{21} & \mu_{22} & \mu_{23} & \mu_{24} & \mu_{25} & \mu_{26}
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1
+\end{bmatrix} &=
+\begin{bmatrix}
+0 & 0 & 0 & 0 & 0 & 0
+\end{bmatrix}
+\end{align*}
+
+#### (b) To test whether the profiles in the two groups are parallel.
+
+$H_0: ABC=D$\ 
+
+$H_0$: $\mu_{12}-\mu_{11} = \mu_{22}-\mu_{21}; \mu_{22}-\mu_{21} = \mu_{32}-\mu_{31}...$ 
+
+\begin{align*}
+A_{(S-1)\times S} &= A_{1\times 2} = [I_1,-1_1] = [1,-1]\\
+B_{S \times t} &= B_{2 \times 6}\\
+C_{t\times (t-1)} &= C_{6 \times 5} = \begin{bmatrix}
+1 & 0 & 0 & 0 & 0  \\
+-1 & 1 & 0 & 0 & 0 \\
+0 & -1 & 1 & 0 & 0 \\
+0 & 0 & -1 & 1 & 0 \\
+0 & 0 & 0 & -1 & 1 \\
+0 & 0 & 0 & 0 & -1
+\end{bmatrix}\\
+D_{(s-1) \times (t-1)} &= 0_{1 \times 5}
+\end{align*}
+
+Therefore,
+\begin{align*}
+A \times B \times C &= D \\
+\begin{bmatrix} 1 & -1 \end{bmatrix}\begin{bmatrix}
+\mu_{11} & \mu_{12} & \mu_{13} & \mu_{14} & \mu_{15} & \mu_{16} \\
+\mu_{21} & \mu_{22} & \mu_{23} & \mu_{24} & \mu_{25} & \mu_{26}
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0  \\
+-1 & 1 & 0 & 0 & 0 \\
+0 & -1 & 1 & 0 & 0 \\
+0 & 0 & -1 & 1 & 0 \\
+0 & 0 & 0 & -1 & 1 \\
+0 & 0 & 0 & 0 & -1
+\end{bmatrix} &=
+\begin{bmatrix}
+0 & 0 & 0 & 0 & 0
+\end{bmatrix}
+\end{align*}
+
+#### (c) To test whether the differences in means at 2 and 3 hours after an oral glucose challenge are different between the control and obese patients.
+
+This is equivalent to test for parallelism between control and treatment group at time 2 and 3. Means at 2 and 3 hours correspond to $\mu_{15}$, $\mu{16}$ for the control group, and $\mu_{25}$, $\mu{26}$ for the treatment group. 
+
+$H_0: ABC=D$\ 
+
+$H_0:  \mu_{16} - \mu_{15} = \mu_{26} - \mu_{25}$
+
+\begin{align*}
+A_{(S-1)\times S} &= A_{1\times 2} = [I_1,-1_1] = [1,-1]\\
+B_{S \times t} &= B_{2 \times 2} = \begin{bmatrix}\mu_{15} & \mu_{16} \\ \mu_{25} & \mu_{26} \end{bmatrix}\\
+C_{t\times (t-1)} &= C_{2 \times 1} = \begin{bmatrix} 1 \\ -1 \end{bmatrix} \\
+D_{(s-1) \times (t-1)} &= 0_{1 \times 1} = 0
+\end{align*}
+
+
+Therefore,
+\begin{align*}
+A \times B \times C &= D \\
+\begin{bmatrix} 1 & -1 \end{bmatrix} \begin{bmatrix}\mu_{15} & \mu_{16} \\ \mu_{25} & \mu_{26} \end{bmatrix}\begin{bmatrix} 1 \\ -1 \end{bmatrix} &= 0
+\end{align*}
+
+### Part B
+
